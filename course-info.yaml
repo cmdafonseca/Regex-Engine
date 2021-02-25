@@ -1,0 +1,12 @@
+type: hyperskill
+title: Regex Engine
+language: English
+summary: Regular expressions are a fundamental part of computer science and natural
+  language processing. In this project, you will write an extendable regex engine
+  that can handle basic regex syntax, including literals (a, b, c, etc.), wild-cards
+  (.), and metacharacters (?, *, +, ^, $).<br/><br/>Learn more at <a href="https://hyperskill.org">https://hyperskill.org/projects/114</a>
+programming_language: Python
+content:
+- Regex Engine
+- Problems
+mode: Study

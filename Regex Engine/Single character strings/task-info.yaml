@@ -1,0 +1,48 @@
+type: edu
+files:
+- name: tests.py
+  visible: false
+  text: |
+    # coding: utf-8
+    from hstest.stage_test import StageTest
+    from hstest.test_case import SimpleTestCase
+
+
+    class RegexTest(StageTest):
+        m_cases = [
+            ("a", "a",          "True",     "Two identical patterns should return True!"),
+            ("a", "b",          "False",    "Two different patterns should not return True!"),
+            ("7", "7",          "True",     "Two identical patterns should return True!"),
+            ("6", "7",          "False",    "Two different patterns should not return True!"),
+            (".", "a",          "True",     "Don't forget that '.' is a wild-card that matches any single character."),
+            ("a", ".",          "False",    "A period in the input string is still a literal!"),
+            ("", "a",           "True",     "An empty regex always returns True!"),
+            ("", "",            "True",     "An empty regex always returns True!"),
+            ("a", "",           "False",    "A non-empty regex and an empty input string always returns False!")
+        ]
+
+
+        def generate(self):
+            return [
+                SimpleTestCase(
+                    stdin="{0}|{1}".format(regex, text),
+                    stdout=output,
+                    feedback=fb
+                ) for regex, text, output, fb in self.m_cases
+            ]
+
+
+    if __name__ == '__main__':
+        RegexTest('regex.regex').run_tests()
+  learner_created: false
+- name: regex/regex.py
+  visible: true
+  text: |
+    # write your code here
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/114/stages/619/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Tue, 08 Dec 2020 11:32:44 UTC
+record: 1

@@ -1,0 +1,9 @@
+type: framework
+content:
+- Single character strings
+- Matching two equal length strings
+- Working with strings of different length
+- Implementing the operators ^ and $
+- Controlling repetition
+- Escaping
+current_task: 5

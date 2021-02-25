@@ -1,0 +1,23 @@
+<h2>Description</h2>
+
+<p>Since <code class="java">^</code>, <code class="java">$</code>, <code class="java">?</code>, <code class="java">*</code>, <code class="java">+</code> and <code class="java">.</code> are now reserved as metacharacters, they cannot be used as literals. This might be a problem, for example, when you want to match the end of sentences. In this case, you would look for words that are succeeded by a period or a question mark. Since these characters have a special meaning in the regex notation, they would not get matched the way you want it.<br>
+To solve this problem, the regex notation has a so called escape sequence: if a metacharacter is preceded by a backward slash (<code class="java">\</code>), it is considered as a normal literal and can be matched.</p>
+
+<h2>Objectives</h2>
+
+<p>Just like it was with the metacharacters, some more conditions should be added to the recursive function to handle the escape symbols.</p>
+
+<p>The semantics of the backward slash is really simple: the character that follows it should be interpreted as a literal. This way, a simple string comparison is enough to determine a match. You should also take care of skipping the escape sequence before continuing the recursion. This can be done using the same logic that we used to handle the repetition operators <code class="java">?</code>, <code class="java">*</code>, and <code class="java">+</code>.</p>
+
+<p>There is also a technical fact you should keep in mind: the <code class="java">\</code> symbol is an escape sequence not only in the regex notation but also in strings. This means that typing <code class="java">\</code> opens a string escape sequence that can be followed by some specific command of the programming language. For example, <code class="java">\n</code> signifies a new line, like <code class="java">Enter</code>. Strangely enough, to get a literal <code class="java">\</code> in most programming languages, you should repeat the backslash twice, like this: <code class="java">\\</code>. For example, a literal period for the regex engine looks like this <code class="java">\\.</code>, a question mark looks like this <code class="java">\\?</code>, and an asterisk looks like this <code class="java">\\*</code>.</p>
+
+<p>Here is another riddle. If the backward slash <code class="java">\</code> is now an escape sequence, how can it be matched as a literal in a string? What if you want to find every string that ends with the character <code class="java">\</code>? Check out the examples below to see what the engine does in this case.</p>
+
+<h2>Example</h2>
+
+<pre><code class="language-no-highlight">Input:      '\.$|end.'              Output: True
+Input:     '3\+3|3+3=6'             Output: True
+Input:       '\?|Is this working?'  Output: True
+Input:       '\\|\'                 Output: True
+Input: 'colou\?r|color'             Output: False
+Input: 'colou\?r|colour'            Output: False</code></pre>

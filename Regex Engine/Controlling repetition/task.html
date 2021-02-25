@@ -1,0 +1,61 @@
+<h2>Description</h2>
+
+<p>What could be better than metacharacters? More metacharacters! In this stage, you should add the following metacharacters to your engine:</p>
+
+<ul>
+	<li><code class="java">?</code> matches the preceding character zero times or once;</li>
+	<li><code class="java">*</code> matches the preceding character zero or more times;</li>
+	<li><code class="java">+</code> matches the preceding character once or more times.</li>
+</ul>
+
+<p>Let's consider these in more detail. Basically, the most important feature of a regex engine is the presence of the repetition operators <code class="java">?</code>, <code class="java">*</code>, and <code class="java">+</code>. They are used to determine how many times a certain character or sequence can be repeated in the string. These operators can make a regular expression really compact and elegant.</p>
+
+<p>Let's look at the sequence <code class="java">aaaaaaaaaab</code>. We can match this string with the following regular expressions: <code class="java">aaaaaaaaaab</code>, <code class="java">a*b</code>, <code class="java">a+b</code>, <code class="java">.*b</code>, <code class="java">.+b</code>. If you want a more realistic example, here is one: the regex <code class="java">colou?r</code> should match the strings <code class="java">color</code> and <code class="java">colour</code>.  </p>
+
+<p>As you can see, the main role of these operators is to control the repetition of the preceding character.</p>
+
+<p>Note that the wildcard (<code class="java">.</code>) can also be placed before these operators, in which case any character is matched zero or several times.</p>
+
+<ul>
+</ul>
+
+<h2>Objectives  </h2>
+
+<p>The best way to implement these metacharacters is by adding more conditions to the function that matches the patterns of equal length.</p>
+
+<p>In the case of the operator <code class="java">?</code>, there are two possible scenarios:</p>
+
+<ol>
+	<li>The preceding character occurs zero times, so basically it is skipped. This means that only the part of the regex after the metacharacter <code class="java">?</code> is passed to the recursive function along with the unmodified input string.</li>
+	<li>The preceding character occurs once. This means that if the character preceding <code class="java">?</code> matches the first character of the input string, the part of the regex after <code class="java">?</code> is passed to the recursive function along with the part of the input string without the character that is already matched.</li>
+</ol>
+
+<p>In the case of the operator <code class="java">*</code>, there are the following scenarios:</p>
+
+<ol>
+	<li>The preceding character occurs zero times (just like with <code class="java">?</code>). The condition from the previous case can be reused.</li>
+	<li>The preceding character occurs one or more times. Like in the case of <code class="java">?</code>, the character preceding <code class="java">*</code> should match the first character of the input string. Since we don’t know how many times it is going to be repeated, the regex should be passed to the recursive function without any modification, and the first character of the input string should be chopped off. In this case, since the metacharacter <code class="java">*</code> is not removed, the second case is repeated until the preceding character can be matched. After that, the first case applies and the function comes out of the recursion.</li>
+</ol>
+
+<p>Finally, here is what can happen with the operator <code class="java">+</code>:</p>
+
+<ol>
+	<li>The preceding character occurs once. This case is the same as the second case with the operator <code class="java">?</code>.</li>
+	<li>The preceding character occurs more than once. This case is basically the same as the second case with the operator <code class="java">*</code>.</li>
+</ol>
+
+<p>You could create separate functions for each operator and invoke them from the <code class="java">match</code> function, or you could include these cases into that function. The important thing to understand is that the logic of recursion does not change with the implementation of these operators, but you might have to fiddle with the number of characters that are going (or not going) to be sliced. Use boolean logic where possible in order to simplify the code and minimize the number of <code class="java">if else</code> clauses.</p>
+
+<h2>Example</h2>
+
+<pre><code class="language-no-highlight">Input: 'colou?r|color'       Output: True
+Input: 'colou?r|colour'      Output: True
+Input: 'colou?r|colouur'     Output: False
+Input: 'colou*r|color'       Output: True
+Input: 'colou*r|colour'      Output: True
+Input: 'colou*r|colouur'     Output: True
+Input:  'col.*r|color'       Output: True
+Input:  'col.*r|colour'      Output: True
+Input:  'col.*r|colr'        Output: True
+Input:  'col.*r|collar'      Output: True
+Input: 'col.*r$|colors'      Output: False</code></pre>

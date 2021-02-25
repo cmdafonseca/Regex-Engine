@@ -1,0 +1,45 @@
+<h2>Description</h2>
+
+<p>In this first stage, create a function that can compare a single character regex to a single character input string.</p>
+
+<p>The reason we are only considering single characters for now is the presence of the wild card indicated by a period (<code class="java">.</code>). Its role in a regular expression is to match any character in the target string. So, if the regex that we pass to our function as an argument is a wild-card, the function always returns <code class="java">True</code> no matter what it is being compared to.</p>
+
+<p>When working on this stage, keep in mind the following special rules of the regex syntax:</p>
+
+<ul>
+	<li>An empty regex should always return <code class="java">True</code>.</li>
+	<li>An empty input string should always return <code class="java">False</code>, except if the regex is also empty. </li>
+	<li>An empty regex against an empty string always returns <code class="java">True</code>.</li>
+</ul>
+
+<p>These rules seem random at first, but later on they will make sense to you.</p>
+
+<h2>Objectives</h2>
+
+<p>In this stage, your program should:</p>
+
+<ul>
+	<li>Accept two characters, a <code class="java">regex</code> and an <code class="java">input</code>;</li>
+	<li>Compare the <code class="java">regex</code> to the <code class="java">input</code> and return a boolean indicating if there's a match;</li>
+	<li>Support <code class="java">.</code> as a wild card character that matches any input;</li>
+	<li>Follow the special syntax rules outlined above.</li>
+</ul>
+
+<p><div class="alert alert-warning">We kindly ask you not to use the <code class="java">re</code> module for completing this project. Otherwise, you will learn nothing from it.</div></p>
+
+<h2>Example</h2>
+
+<pre><code class="language-no-highlight">Input: 'a|a'     Output: True
+Input: '.|a'     Output: True
+Input:  '|a'     Output: True
+Input:  '|'      Output: True
+Input: 'a|'      Output: False
+</code></pre>
+
+<p>Note that it is purely for technical reasons that the input is a single string divided by the symbol <code class="java">|</code>.</p>
+
+<p>On the left of the delimiter <code class="java">|</code> you will find the regular expression, and on the right is the string that is being compared to that regular expression. The absence of an input character before or after the delimiter indicates that an empty string is passed as an argument. So, if the input is <code class="java">'a|'</code>, you should pass <code class="java">'a'</code> as a regular expression and <code class="java">''</code> as an input string to the function.</p>
+
+<p>For valid testing, the results should be printed to the command line. This can be achieved by putting the return value of the function into the print function, which automatically casts the boolean result into a string. You should do this at the end of every stage.</p>
+
+<p><strong>Hint</strong>: There are multiple ways to tell if a string is empty. For example, you can use the fact that the length of an empty string is always zero. You may also compare the input string to an empty string literal represented by empty quotation marks (<code class="java">''</code> or <code class="java">""</code>). Finally, you can use the boolean logic to determine whether a string is empty.</p>
